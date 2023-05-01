@@ -12,8 +12,9 @@ RUN python setup.py install
 WORKDIR /app
 
 COPY requirements.txt ./
-COPY hello.py ./
 
 RUN pip install --no-cache-dir -r requirements.txt
+
+COPY hello.py ./
 
 CMD [ "python", "hello.py" ]
