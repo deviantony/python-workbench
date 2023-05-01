@@ -15,6 +15,6 @@ COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY hello.py ./
+COPY temp.py ./
 
-CMD [ "python", "hello.py" ]
+CMD [ "python", "temp.py" ]
