@@ -20,24 +20,26 @@ mqtt_host = os.environ.get('MQTT_HOST')
 mqtt_port = os.environ.get('MQTT_PORT')
 mqtt_user = os.environ.get('MQTT_USER')
 mqtt_pwd = os.environ.get('MQTT_PASSWORD')
+mqtt_topic = os.environ.get('MQTT_TOPIC')
 
 use_hat = False
 if not mock:
     use_hat = True
 
+if not mqtt_topic:
+    mqtt_topic = "workstations/oven/temp"
+
 # If the DATA_REFRESH environment variable is not found, use a default value of 10 seconds
 if not data_refresh:
     data_refresh = 10
-
-# Convert the value to an integer
-data_refresh = int(data_refresh)
+else:
+    data_refresh = int(data_refresh)
 
 # If the MQTT_PORT environment variable is not found, use a default value of 1883
 if not mqtt_port:
     data_refresh = 1883
-
-# Convert the value to an integer
-mqtt_port = int(mqtt_port)
+else:
+    mqtt_port = int(mqtt_port)
 
 sense = SenseHat()
 client = mqtt.Client()
@@ -53,13 +55,13 @@ def get_temp():
     sense.clear()
     temp = sense.get_temperature()
     print(temp)
-    client.publish("workstations/oven/temp", temp)
+    client.publish(mqtt_topic, temp)
     scheduler.enter(data_refresh, 1, get_temp)
 
 def mock_get_temp():
     temp = random.randint(10, 20)
     print(temp)
-    client.publish("workstations/oven/temp", temp)
+    client.publish(mqtt_topic, temp)
     scheduler.enter(data_refresh, 1, mock_get_temp)
 
 
