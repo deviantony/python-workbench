@@ -37,7 +37,7 @@ else:
 
 # If the MQTT_PORT environment variable is not found, use a default value of 1883
 if not mqtt_port:
-    data_refresh = 1883
+    mqtt_port = 1883
 else:
     mqtt_port = int(mqtt_port)
 
