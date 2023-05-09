@@ -15,6 +15,6 @@ COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY temp.py ./
+COPY sensehat.py ./
 
-CMD [ "python", "temp.py" ]
+CMD [ "python", "sensehat.py" ]
