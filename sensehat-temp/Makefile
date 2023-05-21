@@ -4,7 +4,7 @@ ARCH="aarch64"
 
 .PHONY: image
 
-image := deviantony/pi3-sensehat:temp
+image := deviantony/cookiefactory-ovencollector:latest
 
 image:
 	docker buildx build --platform=$(PLATFORM)/$(ARCH) -t $(image) .
